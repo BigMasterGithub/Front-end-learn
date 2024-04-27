@@ -1,9 +1,10 @@
 //简单的展示信息
-export function simpleMessage(msg){
+function simpleMessage(msg){
     console.log(msg);
 }
 
 //复杂的展示信息
-export function complexMessage(msg){
+function complexMessage(msg){
     console.log(new Date()+":"+msg);
 }
+export{simpleMessage as sm ,complexMessage as cm} 
