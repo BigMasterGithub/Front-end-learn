@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue案例</title>
+
+</head>
+
+<body>
+    <div id="app">
+        用户名 <input type="text" v-model="searchName">        
+        <button v-on:click="search">搜索</button>
+        <br />
+        <br />
+        <table border="1 sold" colspa="0" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>昵称</th>
+                <th>注册时间</th>
+            </tr>
+            <tr v-for="(curuser,index) in list">
+                <td>{{curuser.id}}</td>
+                <td>{{curuser.username}}</td>
+                <td>{{curuser.password}}</td>
+                <td>{{curuser.nickname}}</td>
+                <td>{{curuser.signtime}}</td>
+            </tr>
+
+
+        </table>
+
+
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module">
+
+        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+
+        createApp({
+            data() {
+                return {
+                    list: [],
+                    searchName:""
+                }
+            },methods:
+            {
+                search:function(){
+                    //发送请求
+                    axios.get('http://127.0.0.1:8080/search?name='+this.searchName).then(
+                        result=>{this.list = result.data;}
+                    ).catch(err=>{
+                        console.log(err);
+                    });
+                }
+            },
+            //钩子函数mounted函数获取所有文章数据
+            mounted: function () {
+                axios.get('http://127.0.0.1:8080/user/getAll').then(
+                    result => {
+                        console.log(result.data);
+                        this.list = result.data 
+                    }
+                ).catch(err => {
+                    console.log(err)
+                })
+            }
+
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>
