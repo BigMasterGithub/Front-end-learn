@@ -1,47 +1,38 @@
+<!-- 声明式构建API -->
+<!-- <script >
+    export default{
+      date(){
+        return{
+          msg:"上海"
+        }
+      }
+    }
+</script> -->
+<!-- 组合式构建API 推荐使用！ -->
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+    import {ref} from 'vue'
+     import APIVUE from "./components/api.vue" ;
+    
+     import UserVUE from "./componets/Userinfo.vue";
+    //调用ref函数，定义响应式数据
+    const msg = ref("西安")    
+    
+
+
 </script>
 
+
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <h1>{{msg}}</h1>
+  <br/>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <APIVUE/>
+  <UserVUE></UserVUE>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  h1{
+    color:yellow
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
